@@ -64,6 +64,8 @@ if(program.search){
     var url = url + "&query=" + program.search;
 }
 
+
+
 console.log("\nDownloading images from:\n")
 request(url, (error, response, body) => {
     if (!error && response.statusCode === 200) {
@@ -78,7 +80,49 @@ request(url, (error, response, body) => {
             }
 
             console.log(body[i]["user"].name + " (" + body[i]["user"].links["html"] + ")")
-            download(img, path.join(__dirname, "/" + program.folder + "/image-" + i + ".jpg"), program.folder)
+            download(img, path.join(__dirname, "/" + program.folder + "/image-" + Math.random() + ".jpg"), program.folder)
+        }
+
+    } else {
+        console.log("Got an error: ", error)
+    }
+})
+
+request(url, (error, response, body) => {
+    if (!error && response.statusCode === 200) {
+        var body = JSON.parse(body);
+
+        
+        for (i in body){
+            if(program.width || program.height){
+                var img = body[i]["urls"].custom
+            } else{
+                var img = body[i]["urls"].raw
+            }
+
+            console.log(body[i]["user"].name + " (" + body[i]["user"].links["html"] + ")")
+            download(img, path.join(__dirname, "/" + program.folder + "/image-" + Math.random() + ".jpg"), program.folder)
+        }
+
+    } else {
+        console.log("Got an error: ", error)
+    }
+})
+
+request(url, (error, response, body) => {
+    if (!error && response.statusCode === 200) {
+        var body = JSON.parse(body);
+
+        
+        for (i in body){
+            if(program.width || program.height){
+                var img = body[i]["urls"].custom
+            } else{
+                var img = body[i]["urls"].raw
+            }
+
+            console.log(body[i]["user"].name + " (" + body[i]["user"].links["html"] + ")")
+            download(img, path.join(__dirname, "/" + program.folder + "/image-" + Math.random() + ".jpg"), program.folder)
         }
 
     } else {
